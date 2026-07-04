@@ -1,8 +1,8 @@
-function Header() {
+function Header({title, subtitle}) {
     return (
         <header>
-            <h1>CineScope 🎬</h1>
-            <p>Search your favourite movies</p>
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
         </header>
     );
 }
