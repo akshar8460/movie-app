@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import MovieCard from "./components/MovieCard";
+import MovieGrid from "./components/MovieGrid";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,14 +38,8 @@ function App() {
         setSearchTerm={setSearchTerm}
       />
 
+      <MovieGrid movies = {movies} />
 
-      {movies.map((movie) => (
-      <MovieCard
-        key={movie.id}
-        title={movie.title}
-        rating={movie.rating}
-      />
-    ))}
 
       <p>Searching for: {searchTerm}</p>
     </main>
