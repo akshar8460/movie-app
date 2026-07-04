@@ -1,10 +1,10 @@
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <main>
-      <hi>CineScope 🎬</hi>
-      <p>Search your favourite movies</p>
+      <Header />
     </main>
   );
 }
