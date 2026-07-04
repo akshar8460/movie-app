@@ -1,8 +1,7 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
-import MovieCard from "./components/MovieCard";
 import MovieGrid from "./components/MovieGrid";
 import { searchMovies } from "./services/movieApi";
 
@@ -19,6 +18,9 @@ function App() {
 
 
   async function handleSearch() {
+    if (!searchTerm.trim()){
+      return;
+    }
     setHasSearched(true);
     setError("");
     setLoading(true);
@@ -48,13 +50,13 @@ function App() {
       />
 
       {loading ? (
-        <p>Searching...</p>
+        <p className = "status-message">Searching...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p className = "status-message error-message">{error}</p>
       ) : !hasSearched ? (
-        <p> Welcome to Movie Search App</p>
+        <p className = "status-message">Welcome to Cinescope</p>
       ) : hasSearched && movies.length === 0 ? (
-        <p>No Movies Found</p>
+        <p className = "status-message">No Movies Found</p>
       ) : (
         <MovieGrid movies = {movies} />
       )}
