@@ -1,9 +1,12 @@
-function MovieCard({ title, rating }) {
+function MovieCard({ title, year, poster }) {
     return (
-        <div className = "movie-card">
+        <article className = "movie-card">
+            <img src={poster} alt={title} />
+
             <h2>{title}</h2>
-            <p>⭐ {rating}</p>
-        </div>
+            
+            <p>{year}</p>
+        </article>
     )
 }
 

@@ -1,30 +1,25 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import MovieCard from "./components/MovieCard";
 import MovieGrid from "./components/MovieGrid";
+import { searchMovies } from "./services/movieApi";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const movies = [
-    {
-      id: 1,
-      title: "Batman",
-      rating: 7.8,
-    },
-    {
-      id: 2,
-      title: "Dune",
-      rating: 8.2,
-    },
-    {
-      id: 3,
-      title: "Interstellar",
-      rating: 8.7,
-    },
-  ];
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function loadMovies() {
+      const data = await searchMovies("Batman");
+
+      setMovies(data);
+    }
+
+    loadMovies();
+  }, []);
 
   return (
     <main>

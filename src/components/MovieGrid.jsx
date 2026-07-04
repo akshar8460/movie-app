@@ -7,7 +7,8 @@ function MovieGrid({movies}) {
                 <MovieCard
                   key = {movie.id}
                   title = {movie.title}
-                  rating = {movie.rating}
+                  year = {movie.year}
+                  poster = {movie.poster}
                 />
             ))}
         </section>
