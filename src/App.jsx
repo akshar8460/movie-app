@@ -11,20 +11,27 @@ function App() {
 
   const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
-    async function loadMovies() {
-      const data = await searchMovies("Batman");
+  const [loading, setLoading] = useState(false);
 
-      setMovies(data);
-    }
+  const [error, setError] = useState("");
 
-    loadMovies();
-  }, []);
+  const [hasSearched, setHasSearched] = useState(false);
+
 
   async function handleSearch() {
-    const data = await searchMovies(searchTerm);
-
-    setMovies(data);
+    setHasSearched(true);
+    setError("");
+    setLoading(true);
+    try {
+        const data = await searchMovies(searchTerm);
+        setMovies(data);
+        
+    } catch (error) {
+      console.error(error);
+      setError("Failed to search movies. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -40,10 +47,18 @@ function App() {
         onSearch={handleSearch}
       />
 
-      <MovieGrid movies = {movies} />
+      {loading ? (
+        <p>Searching...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : !hasSearched ? (
+        <p> Welcome to Movie Search App</p>
+      ) : hasSearched && movies.length === 0 ? (
+        <p>No Movies Found</p>
+      ) : (
+        <MovieGrid movies = {movies} />
+      )}
 
-
-      <p>Searching for: {searchTerm}</p>
     </main>
   );
 }

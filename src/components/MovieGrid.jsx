@@ -2,7 +2,7 @@ import MovieCard from "./MovieCard";
 
 function MovieGrid({movies}) {
     return (
-        <section classNamr = "movie-grid">
+        <section className = "movie-grid">
             {movies.map((movie) => (
                 <MovieCard
                   key = {movie.id}
