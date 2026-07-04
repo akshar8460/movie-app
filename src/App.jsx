@@ -21,6 +21,12 @@ function App() {
     loadMovies();
   }, []);
 
+  async function handleSearch() {
+    const data = await searchMovies(searchTerm);
+
+    setMovies(data);
+  }
+
   return (
     <main>
       <Header
@@ -31,6 +37,7 @@ function App() {
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        onSearch={handleSearch}
       />
 
       <MovieGrid movies = {movies} />

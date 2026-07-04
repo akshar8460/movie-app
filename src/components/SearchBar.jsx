@@ -1,4 +1,4 @@
-function SearchBar({ searchTerm, setSearchTerm }) {
+function SearchBar({ searchTerm, setSearchTerm, onSearch }) {
     function handleChange(event) {
       setSearchTerm(event.target.value);
     }
@@ -12,7 +12,7 @@ function SearchBar({ searchTerm, setSearchTerm }) {
           onChange={handleChange}
         />
   
-        <button>Search</button>
+        <button onClick={onSearch}>Search</button>
       </section>
     );
   }
