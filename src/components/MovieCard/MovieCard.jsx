@@ -1,6 +1,7 @@
-import "../MovieCard.css";
+import "./MovieCard.css";
 
 function MovieCard({ title, year, poster }) {
+
   const posterUrl =
     poster && poster !== "N/A"
       ? poster
@@ -8,12 +9,24 @@ function MovieCard({ title, year, poster }) {
 
   return (
     <article className="movie-card">
-      <img src={posterUrl} alt={title} />
+
+      <div className="movie-overlay"></div>
+
+      <img
+        src={posterUrl}
+        alt={title}
+      />
 
       <div className="movie-card-content">
+
         <h2>{title}</h2>
-        <p>📅 {year}</p>
+
+        <p className="movie-year">
+          📅 {year}
+        </p>
+
       </div>
+
     </article>
   );
 }

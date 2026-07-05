@@ -1,24 +1,67 @@
-* {
-  margin: 0;
-  padding: 0;
+/* -----------------------------
+   Google Font (Configured in index.html)
+------------------------------*/
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 :root {
-  --bg: #111827;
+  --background: #030712;
+  --surface: #111827;
   --card: #1f2937;
-  --card-hover: #374151;
+  --card-hover: #273549;
+
   --primary: #f59e0b;
+  --primary-hover: #fbbf24;
+
   --text: #f9fafb;
-  --text-light: #9ca3af;
+  --text-secondary: #9ca3af;
+
+  --success: #10b981;
   --danger: #ef4444;
+
+  --shadow:
+    0 10px 35px rgba(0,0,0,.35);
+
+  --radius: 18px;
+
+  --transition: .25s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, #111827, #1f2937);
+
+  font-family: "Poppins", sans-serif;
+
+  background:
+    radial-gradient(circle at top,
+      #1f2937 0%,
+      #111827 45%,
+      #030712 100%);
+
   color: var(--text);
+
   min-height: 100vh;
+
+  -webkit-font-smoothing: antialiased;
+
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  width: 100%;
 }
 
 button,
@@ -26,7 +69,11 @@ input {
   font: inherit;
 }
 
-img {
-  display: block;
-  max-width: 100%;
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }

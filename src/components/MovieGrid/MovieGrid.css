@@ -1,0 +1,31 @@
+.movie-grid {
+    display: grid;
+  
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(220px, 1fr)
+    );
+  
+    gap: 2rem;
+  
+    align-items: start;
+  
+    animation: fadeUp .5s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .movie-grid {
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(170px, 1fr)
+      );
+  
+      gap: 1.2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .movie-grid {
+      grid-template-columns: 1fr;
+    }
+  }

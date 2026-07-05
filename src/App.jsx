@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
-import MovieGrid from "./components/MovieGrid";
+import Header from "./components/Header/Header";
+import SearchBar from "./components/SearchBar/SearchBar";
+import MovieGrid from "./components/MovieGrid/MovieGrid";
 import { searchMovies } from "./services/movieApi";
 
 function App() {
@@ -54,9 +54,16 @@ function App() {
       ) : error ? (
         <p className = "status-message error-message">{error}</p>
       ) : !hasSearched ? (
-        <p className = "status-message">Welcome to Cinescope</p>
+        <div className="status-message">
+          <h2>👋 Welcome to CineScope</h2>
+          <p>Search millions of movies and discover your next favourite film.</p>
+        </div>
       ) : hasSearched && movies.length === 0 ? (
-        <p className = "status-message">No Movies Found</p>
+        <div className="status-message">
+          <h2>🎬 No Movies Found</h2>
+
+          <p>Try searching with another title.</p>
+        </div>
       ) : (
         <MovieGrid movies = {movies} />
       )}
