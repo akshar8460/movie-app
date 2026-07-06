@@ -8,16 +8,16 @@ function MovieGrid({ movies, favorites, toggleFavorite }) {
         const isFavorite = favorites.some((fav) => fav.id === movie.id
       );
         return (
-        <MovieCard
-          key={movie.id}
-          title={movie.title}
-          year={movie.year}
-          poster={movie.poster}
+          <MovieCard
+            key={movie.id}
+            title={movie.title}
+            year={movie.year}
+            poster={movie.poster}
 
-          isFavorite={isFavorite}
+            isFavorite={isFavorite}
 
-          onToggleFavorite={() => toggleFavorite(movie)}  
-        />
+            onToggleFavorite={() => toggleFavorite(movie)}  
+          />
       );
     })}
     </section>

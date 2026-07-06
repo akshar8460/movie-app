@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
 import SearchBar from "./components/SearchBar/SearchBar";
 import MovieGrid from "./components/MovieGrid/MovieGrid";
@@ -16,7 +16,10 @@ function App() {
 
   const [hasSearched, setHasSearched] = useState(false);
 
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(()=>{
+    const storedFavorites = localStorage.getItem("favorites");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
 
 
   async function handleSearch() {
@@ -51,6 +54,14 @@ function App() {
       ]);
     }
   }
+
+  useEffect(() => {
+
+    localStorage.setItem(
+      "favorites",
+      JSON.stringify(favorites)
+    );
+  }, [favorites]);
 
   return (
     <main>
