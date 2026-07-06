@@ -1,6 +1,6 @@
 import "./MovieCard.css";
 
-function MovieCard({ title, year, poster }) {
+function MovieCard({ title, year, poster, isFavorite, onToggleFavorite }) {
 
   const posterUrl =
     poster && poster !== "N/A"
@@ -11,6 +11,13 @@ function MovieCard({ title, year, poster }) {
     <article className="movie-card">
 
       <div className="movie-overlay"></div>
+
+      <button
+        className="favorite-button"
+        onClick={onToggleFavorite}
+      >
+        {isFavorite ? "💖" : "🤍"}
+      </button>
 
       <img
         src={posterUrl}

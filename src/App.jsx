@@ -16,6 +16,8 @@ function App() {
 
   const [hasSearched, setHasSearched] = useState(false);
 
+  const [favorites, setFavorites] = useState([]);
+
 
   async function handleSearch() {
     if (!searchTerm.trim()){
@@ -33,6 +35,20 @@ function App() {
       setError("Failed to search movies. Please try again.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  function toggleFavorite(movie) {
+    const isFavorite = favorites.some((fav) => fav.id === movie.id);
+  
+    if (isFavorite) {
+      setFavorites(
+        favorites.filter((fav) => fav.id !== movie.id)
+      );
+    } else {
+      setFavorites([
+        ...favorites, movie
+      ]);
     }
   }
 
@@ -65,7 +81,11 @@ function App() {
           <p>Try searching with another title.</p>
         </div>
       ) : (
-        <MovieGrid movies = {movies} />
+        <MovieGrid 
+        movies = {movies} 
+        favorites={favorites}
+        toggleFavorite={toggleFavorite}
+        />
       )}
 
     </main>
