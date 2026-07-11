@@ -17,9 +17,9 @@
 
 ## 🚧 Phase 2 - User Experience
 
-- [ ] Premium UI redesign
-- [ ] Favorites
-- [ ] Save favorites (localStorage)
+- [X] Premium UI redesign
+- [X] Favorites
+- [X] Save favorites (localStorage)
 - [ ] Movie details modal
 - [ ] Pagination
 - [ ] Debounced search

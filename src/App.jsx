@@ -1,62 +1,34 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header/Header";
-import SearchBar from "./components/SearchBar/SearchBar";
-import MovieGrid from "./components/MovieGrid/MovieGrid";
-import { searchMovies } from "./services/movieApi";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home/Home";
+import Favorites from "./pages/Favorites/Favorites";
+import Navigation from "./components/Navigation/Navigation";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [movies, setMovies] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-
-  const [error, setError] = useState("");
-
-  const [hasSearched, setHasSearched] = useState(false);
-
-  const [favorites, setFavorites] = useState(()=>{
+  const [favorites, setFavorites] = useState(() => {
     const storedFavorites = localStorage.getItem("favorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
 
-
-  async function handleSearch() {
-    if (!searchTerm.trim()){
-      return;
-    }
-    setHasSearched(true);
-    setError("");
-    setLoading(true);
-    try {
-        const data = await searchMovies(searchTerm);
-        setMovies(data);
-        
-    } catch (error) {
-      console.error(error);
-      setError("Failed to search movies. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   function toggleFavorite(movie) {
     const isFavorite = favorites.some((fav) => fav.id === movie.id);
-  
+
     if (isFavorite) {
       setFavorites(
         favorites.filter((fav) => fav.id !== movie.id)
       );
     } else {
       setFavorites([
-        ...favorites, movie
+        ...favorites,
+        movie,
       ]);
     }
   }
 
   useEffect(() => {
-
     localStorage.setItem(
       "favorites",
       JSON.stringify(favorites)
@@ -70,35 +42,29 @@ function App() {
         subtitle="Search your favourite movies."
       />
 
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        onSearch={handleSearch}
-      />
+      <Navigation />
 
-      {loading ? (
-        <p className = "status-message">Searching...</p>
-      ) : error ? (
-        <p className = "status-message error-message">{error}</p>
-      ) : !hasSearched ? (
-        <div className="status-message">
-          <h2>👋 Welcome to CineScope</h2>
-          <p>Search millions of movies and discover your next favourite film.</p>
-        </div>
-      ) : hasSearched && movies.length === 0 ? (
-        <div className="status-message">
-          <h2>🎬 No Movies Found</h2>
-
-          <p>Try searching with another title.</p>
-        </div>
-      ) : (
-        <MovieGrid 
-        movies = {movies} 
-        favorites={favorites}
-        toggleFavorite={toggleFavorite}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          }
         />
-      )}
 
+        <Route
+          path="/favorites"
+          element={
+            <Favorites
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+          }
+        />
+      </Routes>
     </main>
   );
 }
